@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row text-center">
+    <h1>{{ title }}</h1>
+    <div class="col-md-12">
+        <div class="my_form">
+            <img src="https://cdn.dribbble.com/userupload/15911300/file/original-cabd96daa80e19eaf46b341ac83885c9.jpg?resize=1024x768&vertical=center" 
+            alt="">
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }} <br>
+                    {{ form.username(size=32) }} <br>
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">
+                        {{ error }}
+                    </span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }} <br>
+                    {{ form.password(size=32) }} <br>
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">
+                        {{ error }}
+                    </span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.remember_me() }} {{ form.remember_me.label }}
+                </p>
+                <p>
+                    {{ form.submit() }}
+                </p>
+            </form>
+            <p>
+                New here? <a href="{{  url_for('register')  }}">Register</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock%}

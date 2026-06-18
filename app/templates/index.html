@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row text-center">
+    <div class="col-md-12">
+        {% if current_user.is_authenticated %}
+        <p>
+            Hi {{  current_user.username  }}, say something:
+        </p>
+        <form action="" method="post" novalidate>
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.body.label }} <br>
+                {{ form.body(size=32) }} <br>
+                {% for error in form.body.errors %}
+                <span style="color: red;">
+                    {{ error }}
+                </span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.submit() }}
+            </p>
+        </form>
+        {% endif %}
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-md-12">
+        {% for post in posts %}
+            {% if post %}
+                {% include '_post.html' %}
+            {% endif %}
+        {% endfor %}
+
+        <!-- Pagination -->
+        {% if prev_url %}
+            <a href=" {{ prev_url }} ">Newer Posts</a>
+        {% endif %}
+        {% if next_url %}
+            <a href=" {{ next_url }} ">Older Posts</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock%}
